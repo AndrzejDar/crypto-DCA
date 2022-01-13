@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crypto DCA App</title>
+
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="title-container">
+        <h1>
+          CRYPTO <span class="text-bold"> DCA </span>STRATEGY CALCULATOR AND
+          ANALISIS
+        </h1>
+        <h2>
+          Compare dollar-cost averaging strategy on traditiona market against
+          cryptocurency markets
+        </h2>
+        <hr>
+      </div>
+
+      <div class="main-container">
+        <div class="nav-container">
+          <form id="general-form">
+            <label for="general-form" class="text-bold">DCA Parameters:</label>
+            <div class="form-div">
+              <label>Asset (coin):</label>
+              <select value="BTC" class="token-select">
+                <option value="btc">BTC</option>
+                <option value="eth">ETH</option>
+                <option value="etc">ETC</option>
+              </select>
+            </div>
+            <div class="form-div">
+              <label>Start:</label>
+              <input type="date" class="start-date-input" />
+              <label>End:</label>
+              <input type="date" class="end-date-input" />
+            </div>
+            <div class="form-div">
+              <label>Investment amount (USD):</label>
+              <input type="number" class="amount-invested" />
+              <label for="">Investment interval (days):</label>
+              <input type="number" class="invest-interval" />
+            </div>
+            <div class="form-div">
+              <button type="submit" class="calculate-btn">CALCULATE</button>
+            </div>
+          </form>
+          <form class="comparison-form">
+            <label for="comparison-form" class="text-bold">Options:</label>
+            <div class="form-div">
+              <label>tag:</label>
+              <input type="text" class="description-input" />
+              <button class="comparison-btn">add to comparison</button>
+            </div>
+          </form>
+          <fieldset>
+            <span>
+              <input type="checkbox" id="sp500" name="sp500" class="sp500" />
+              <label for="sp500">show benchmark (S&P500 wallet)</label></span
+            >
+
+            <div class="form-div">
+              <span>
+                <input
+                  type="checkbox"
+                  id="asset-price"
+                  name="asset-price"
+                  class="asset-price"
+                />
+                <label for="asset-price">show $ASSET price</label></span
+              >
+            </div>
+          </fieldset>
+
+          <div class="result-div">
+            <span class="text-bold"> Investment results:</span>
+            <table>
+              <tr>
+                <td>ROI:</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>amount invested:</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>ballance:</td>
+                <td></td>
+              </tr>
+            </table>
+            <p>
+              Investing 100$ every 7 days from 12-12-12 to 13-13-13 in BTC wolud
+              result in 123$ GAIN/LOS - calculated as +-123% ROI! In comparison
+              same investment in traditional stocks (S&P500) wolud result in
+              123$ GAIN.
+            </p>
+          </div>
+        </div>
+        <div class="content-container">
+          <div class="chart-container">
+            <canvas id="mainChart" width="1024" height="764"></canvas>
+          </div>
+          <table class="result-table">
+            <tr>
+              <th>tag:</th>
+              <th>investment:</th>
+              <th>final value:</th>
+              <th>return:</th>              
+              <th>show</th>
+              <th>delete</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="./assets/js/main.js"></script>
+  </body>
+</html>
