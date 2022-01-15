@@ -2,6 +2,7 @@
   "name": "v01",
   "version": "1.0.0",
   "description": "BTC DCA APP",
+  "homepage": "http://bearsthemespremium.com/",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --hot -d",
