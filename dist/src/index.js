@@ -16,6 +16,7 @@ const investInterval = document.querySelector(".invest-interval");
 const description = document.querySelector(".description-input");
 const calcBtn = document.querySelector(".calculate-btn");
 const resTable = document.querySelector(".result-table");
+const comparisonBtn = document.querySelector(".comparison-btn");
 
 const sp500opt = document.querySelector(".sp500");
 const assetPriceOpt = document.querySelector(".asset-price");
@@ -24,6 +25,9 @@ calcBtn.addEventListener("click", calculateWalletBtn);
 sp500opt.addEventListener("click", showSP500);
 assetPriceOpt.addEventListener("click", showAssetPrice);
 tokenSelect.addEventListener("change", changeCurrencyE);
+comparisonBtn.addEventListener("click", createRowResultBtn);
+
+
 
 let data;
 let tokenData = [];
@@ -50,7 +54,14 @@ let spW = []; //S&P wallet
 loadData("btc");
 drawMainChart("btc");
 
-function createRowResult(tag, inv, val, ret) {
+
+function createRowResultBtn(e){
+  e.preventDefault();
+  createRowResult(description.value,inv,w[w.length-1],w[pZ.length - 1] / inv - 1);
+}
+
+
+function createRowResult(tag, inv, val , ret ) {
   const tr = document.createElement("tr");
   tr.classList.add("result-tr");
   const td1 = document.createElement("td");
@@ -76,9 +87,15 @@ function createRowResult(tag, inv, val, ret) {
   });
   td4.innerText =
     "  + " +
-    ret.toLocaleString("en-US", { maximumSignificantDigits: 4 }) * 100 +
-    "%";
-  td5.innerText = "";
+    (ret).toLocaleString("en-US", { 
+      style: "percent",
+      maximumFractionDigits: 2 })
+    ;
+  td6.innerHTML = `<button class="clear"><i class="fas fa-window-close"></i></button>`;
+
+  const removeBtn= td6.querySelector(".clear");
+  removeBtn.addEventListener("click", removeRowResult);
+
   tr.appendChild(td1);
   tr.appendChild(td2);
   tr.appendChild(td3);
@@ -87,6 +104,11 @@ function createRowResult(tag, inv, val, ret) {
   tr.appendChild(td6);
   resTable.appendChild(tr);
 }
+
+function removeRowResult(){
+  this.parentElement.parentElement.remove();
+};
+
 function changeCurrencyE(e){
   d = [];
   p = [];
@@ -102,7 +124,7 @@ function changeCurrency(e) {
   //console.log(e.target.value);
 
   // parseTokenData(token, data);
-  setForm();
+  setForm(e);
   //initZoomData();
   //calculateWallet();
 
@@ -130,6 +152,7 @@ function calculateWalletBtn(e) {
   /*mChart.data.datasets[2].data = spPZ;*/
   //logArrays();
   mChart.update();
+  resultsDescribtion();
   console.log("updejtuje mchart");
 
   //console.log("po update mchart: " + pZ);
@@ -261,10 +284,14 @@ function drawMainChart(token) {
       {
         label: token + " price",
         type: "line",
-        backgroundColor: "rgb(255, 159, 186)",
-        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(52, 128, 202, 0.4)",
+        borderColor: "rgba(52, 128, 202,0.4)",
         data: pZ,
-        hidden: false,
+        borderWidth: 2,
+        borderJoinStyle: 'bevel',
+        pointBorderWidth: 0,
+        pointHitRadius: 0,
+        hidden: false,        
       },
       {
         label: "wallet",
@@ -283,8 +310,8 @@ function drawMainChart(token) {
       {
         label: "S&P wallet",
         type: "bar",
-        backgroundColor: "rgba(117, 6, 6, 0.6)",
-        borderColor: "rgb(117, 6, 6)",
+        backgroundColor: "rgba(117, 6, 6, 0.5)",
+        borderColor: "rgba(117, 6, 6,0.1)",
         data: spW,
         yAxisID: "myScale2",
         order: 1,
@@ -347,7 +374,7 @@ function maxRange(data) {
   return max * 1.05;
 }
 
-function setForm() {
+function setForm(token) {
   startDateInput.setAttribute("min", d[0]);
   startDateInput.setAttribute("max", d[d.length - 1]);
   startDateInput.setAttribute("value", d[0]);
@@ -361,6 +388,10 @@ function setForm() {
 
   sp500opt.checked= true;
   assetPriceOpt.checked= true;
+
+  const assetPriceOptLabel =assetPriceOpt.nextElementSibling;
+  assetPriceOptLabel.innerHTML= `show <b>${token}</b> price chart`;
+  
 
 }
 
@@ -384,6 +415,7 @@ function loadData(token) {
         //drawMainChart(token);
         changeCurrency("btc")
         printInitTableData();
+        resultsDescribtion();
       });
     });
   });
@@ -461,7 +493,7 @@ function parseTokenData(token, data) {
     }
   });
 
-  setForm();
+  setForm(token);
   //logArrays();
   //initZoomData();
   //calculateWallet();
@@ -489,12 +521,22 @@ function printInitTableData() {
     spW[spW.length - 1] / inv - 1
   );
 
-  createRowResult(
-    description.value,
-    inv,
-    w[pZ.length - 1],
-    w[pZ.length - 1] / inv - 1
-  );
+  // createRowResult(
+  //   description.value,
+  //   inv,
+  //   w[pZ.length - 1],
+  //   w[pZ.length - 1] / inv - 1
+  // );
+}
+
+function resultsDescribtion(){
+  const t=document.querySelector(".results-desc-table");
+  const d=document.querySelector(".results-desc");
+  d.innerText=`Investing ${amountInvested.value}$ every ${investInterval.value} days from ${startDateInput.value} to ${endDateInput.value} in ${tokenSelect.value} would
+  result in ${w[length-1]-inv} ${w[length-1]-inv > 0 ? "GAIN" : "LOSS"} - calculated as ${w[length-1]/inv-1} ROI! In comparison
+  same investment in traditional stocks (S&P500) wolud result in
+  ${spW[spW.lenght-1]-inv} GAIN.`
+
 }
 
 function loadSP500() {

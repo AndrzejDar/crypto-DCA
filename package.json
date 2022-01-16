@@ -2,10 +2,12 @@
   "name": "v01",
   "version": "1.0.0",
   "description": "BTC DCA APP",
+  "homepage": "http://bearsthemespremium.com/",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --hot -d",
-    "build": "webpack",
+    "build": "webpack -p",
+    "start": "node ./node_modules/webpack/bin/webpack.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
