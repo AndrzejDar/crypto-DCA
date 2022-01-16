@@ -91,7 +91,7 @@ function createRowResult(tag, inv, val , ret ) {
       style: "percent",
       maximumFractionDigits: 2 })
     ;
-  td6.innerHTML = `<button class="clear"><i class="fas fa-window-close"></i></button>`;
+  td6.innerHTML = `<button class="clear"><i class="fas fa-times"></i></button>`;
 
   const removeBtn= td6.querySelector(".clear");
   removeBtn.addEventListener("click", removeRowResult);
@@ -532,10 +532,45 @@ function printInitTableData() {
 function resultsDescribtion(){
   const t=document.querySelector(".results-desc-table");
   const d=document.querySelector(".results-desc");
-  d.innerText=`Investing ${amountInvested.value}$ every ${investInterval.value} days from ${startDateInput.value} to ${endDateInput.value} in ${tokenSelect.value} would
-  result in ${w[length-1]-inv} ${w[length-1]-inv > 0 ? "GAIN" : "LOSS"} - calculated as ${w[length-1]/inv-1} ROI! In comparison
+
+
+t.innerHTML=`
+<tr>
+<td>ROI:</td>
+<td class="text-bold"><b>${(w[w.length-1]/inv-1).toLocaleString("en-US",{style: "percent", maximumFractionDigits: 0})}</b></td>
+</tr>
+<tr>
+<td>amount invested:</td>
+<td class="text-bold">${inv.toLocaleString("en-US", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0,
+})}</td>
+</tr>
+<tr>
+<td>ballance:</td>
+<td class="text-bold">${(w[w.length-1]).toLocaleString("en-US", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0,
+})}</td>
+</tr>
+
+`
+
+
+  d.innerHTML=`Investing ${amountInvested.value}$ every ${investInterval.value} days from ${startDateInput.value} to ${endDateInput.value} in <b>${tokenSelect.value}</b> would
+  result in ${(w[w.length-1]-inv).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  })} ${w[w.length-1]-inv > 0 ? "GAIN" : "LOSS"} - calculated as ${(w[w.length-1]/inv-1).toLocaleString("en-US",{style: "percent", maximumFractionDigits: 0})} ROI! In comparison
   same investment in traditional stocks (S&P500) wolud result in
-  ${spW[spW.lenght-1]-inv} GAIN.`
+  ${(spW[spW.length-1]-inv).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  })} GAIN.`
 
 }
 
@@ -633,6 +668,7 @@ function showAssetPrice() {
     mChart.data.datasets[0].hidden = true;
   }
   mChart.update();
+  console.log("zmieniam widoczność crypto");
 }
 
 if (module.hot) {

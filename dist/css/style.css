@@ -22,8 +22,6 @@ h1 {
   margin-bottom: 1rem;
   text-align: center;
   font-weight: 500;
-
-  /*background-color: brown;*/
 }
 
 h2 {
@@ -32,8 +30,6 @@ h2 {
   margin-bottom: 1rem;
   text-align: center;
   font-weight: 500;
-
-  /*background-color: brown;*/
 }
 
 .text-bold {
@@ -49,27 +45,17 @@ h2 {
   padding: 20px;
   margin: 30px;
   min-width: 1064px;
-  /*max-width: 1264px;*/
-  /*width: auto;*/
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  /*justify-content: center;*/
+  flex-wrap: wrap; 
   align-items: center;
-  /*align-items: left;*/
   max-height: fit-content;
   max-width: fit-content;
 }
 
-/* @media(min-width: 1350px){
-  .container{
-    flex-direction: row;
-  }
-} */
 
 .title-container {
   width: 1024px;
-  /*height: 200px;*/
   overflow: hidden;
   flex-shrink: 1;
   flex-grow: 0;
@@ -78,16 +64,9 @@ h2 {
 }
 
 .main-container {
-  /* min-width: 1064px;
-  max-width: 1264px; */
   width: auto;
   display: flex;
   flex-direction: row;
-  /*flex-wrap: wrap;*/
-  /*justify-content: flex-end;*/
-  /*align-items: flex-end;*/
-  /*align-items: left;*/
-  /* max-height: fit-content; */
 }
 
 @media(max-width:1350px) {
@@ -97,13 +76,9 @@ h2 {
 }
 
 .nav-container {
-  /*min-width: 200px;*/
-  /* max-width: 400px; */
-
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: 0;
-
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -118,11 +93,12 @@ h2 {
     flex-direction: column;
     width: 200px;
     max-height: fit-content;
+    margin-right: 20px;
   }
 }
 
 .nav-container > * {
-  max-width: 200px;
+  width: 200px;
   flex-shrink: 0;
   flex-grow: 0;
   flex-basis: 0;
@@ -138,20 +114,17 @@ form {
 .form-div {
   display: flex;
   flex-direction: column;
-  margin-right: 30px;
-  /*flex-wrap: wrap;*/
+  /*margin-right: 30px;*/
 }
 
 .result-div {
   min-width: 50%;
-  /*max-width: 100%;*/
-  /*flex-basis: 50%;*/
   flex-grow: 1;
-  flex-shrink: 1;
-  /*flex-wrap: wrap;*/
+  flex-shrink: 1;  
+}
 
-  /*width: auto;*/
-  
+fieldset{
+  border-width: 0px;
 }
 
 .content-container{
@@ -171,3 +144,40 @@ canvas {
 .result-table{
   text-align: left;
 }
+
+button{
+  border-radius: 5px;
+  border-width: 0px;
+  background-color: rgba(52, 128, 202, 0.4);
+  height: 2rem;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+button:hover{
+  background-color: rgba(52, 128, 202, 1);
+  color: white;
+}
+
+.calculate-btn{
+  background-color: rgba(52, 128, 202, 1);
+  color: white;
+}
+
+.calculate-btn:hover{
+  background-color: rgba(52, 128, 202, 0.4);
+  color: black;
+}
+
+button.clear{
+  font-size: 2rem;
+  color: rgba(52, 128, 202, 0.4);
+  background-color: transparent;
+  text-align: center;
+  margin: 0px 10px;
+}
+
+button.clear:hover{
+  color: rgba(52, 128, 202, 1);
+}
+
