@@ -14,7 +14,7 @@ module.exports = {
     contentBase: path.join(__dirname, `${entryPath}/dist`),
     publicPath: "/assets/",
     compress: true,
-    port: 3001,
+    port: 3002,
     hot: true,
     watchContentBase: true,
   },
